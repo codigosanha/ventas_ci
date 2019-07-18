@@ -44,7 +44,7 @@
                                 <?php echo form_error("precio_compra","<span class='help-block'>","</span>");?>
                             </div>
                             <div class="form-group <?php echo !empty(form_error('precio_venta')) ? 'has-error':'';?>">
-                                <label for="precio_venta">Precio:</label>
+                                <label for="precio_venta">Precio Venta:</label>
                                 <input type="text" class="form-control" id="precio_venta" name="precio_venta" value="<?php echo !empty(form_error('precio_venta')) ? set_value('precio_venta'):$producto->precio_venta?>">
                                 <?php echo form_error("precio_venta","<span class='help-block'>","</span>");?>
                             </div>

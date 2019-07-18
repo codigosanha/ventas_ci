@@ -56,6 +56,7 @@ class Ventas extends CI_Controller {
 		$precios = $this->input->post("precios");
 		$cantidades = $this->input->post("cantidades");
 		$importes = $this->input->post("importes");
+		$descuentos = $this->input->post("descuentos");
 
 		$data = array(
 			'fecha' => $fecha,
@@ -73,7 +74,7 @@ class Ventas extends CI_Controller {
 		if ($this->Ventas_model->save($data)) {
 			$idventa = $this->Ventas_model->lastID();
 			$this->updateComprobante($idcomprobante);
-			$this->save_detalle($idproductos,$idventa,$precios,$cantidades,$importes);
+			$this->save_detalle($idproductos,$idventa,$precios,$cantidades,$importes,$descuentos);
 			redirect(base_url()."movimientos/ventas");
 
 		}else{
@@ -89,7 +90,7 @@ class Ventas extends CI_Controller {
 		$this->Ventas_model->updateComprobante($idcomprobante,$data);
 	}
 
-	protected function save_detalle($productos,$idventa,$precios,$cantidades,$importes){
+	protected function save_detalle($productos,$idventa,$precios,$cantidades,$importes,$descuentos){
 		for ($i=0; $i < count($productos); $i++) { 
 			$data  = array(
 				'producto_id' => $productos[$i], 
@@ -97,6 +98,7 @@ class Ventas extends CI_Controller {
 				'precio' => $precios[$i],
 				'cantidad' => $cantidades[$i],
 				'importe'=> $importes[$i],
+				'descuento'=> $descuentos[$i],
 			);
 
 			$this->Ventas_model->save_detalle($data);

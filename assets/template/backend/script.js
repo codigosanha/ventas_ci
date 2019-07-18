@@ -2,6 +2,9 @@ $(document).ready(function () {
     
     var year = (new Date).getFullYear();
     datagrafico(base_url,year);
+    $('#dni, #telefono, .cantidades').keypress(function (tecla) {
+      if (tecla.charCode < 48 || tecla.charCode > 57) return false;
+    });
     $("#year").on("change",function(){
         yearselect = $(this).val();
         datagrafico(base_url,yearselect);
@@ -200,7 +203,7 @@ $(document).ready(function () {
             html += "<td>"+infoproducto[2]+"</td>";
             html += "<td><input type='hidden' name='precios[]' value='"+infoproducto[3]+"'>"+infoproducto[3]+"</td>";
             html += "<td>"+infoproducto[4]+"</td>";
-            html += "<td><input type='text' name='cantidades[]' value='1' class='cantidades'></td>";
+            html += "<td><input type='text' name='cantidades[]' value='1' class='cantidades' required='required'></td>";
             html += "<td><input type='text' name='descuentos[]' value='0.00' class='descuentos'></td>";
             html += "<td><input type='hidden' name='importes[]' value='"+infoproducto[3]+"'><p>"+infoproducto[3]+"</p></td>";
             html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
@@ -220,12 +223,35 @@ $(document).ready(function () {
     });
     $(document).on("keyup","#tbventas input.cantidades", function(){
         cantidad = $(this).val();
+        stock = $(this).closest("tr").find("td:eq(3)").text();
         precio = $(this).closest("tr").find("td:eq(2)").text();
         descuento = $(this).closest("tr").children("td:eq(5)").find("input").val();
-        importe = (cantidad * precio) - descuento;
-        $(this).closest("tr").find("td:eq(6)").children("p").text(importe.toFixed(2));
-        $(this).closest("tr").find("td:eq(6)").children("input").val(importe.toFixed(2));
-        sumar();
+        if (cantidad !="") {
+            if (Number(cantidad) == 0) {
+                alert("La cantidad no puede ser 0");
+                importe = precio - descuento;
+                $(this).val("1");
+                $(this).closest("tr").find("td:eq(6)").children("p").text(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(6)").children("input").val(importe.toFixed(2));
+                sumar();
+            } else if(Number(cantidad) > Number(stock)){
+                importe = (precio * stock) - descuento;
+                $(this).val(stock);
+                $(this).closest("tr").find("td:eq(6)").children("p").text(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(6)").children("input").val(importe.toFixed(2));
+                sumar();
+                alert("La cantidad no puede sobrepasar el stock");
+            }
+            else{
+                importe = (cantidad * precio) - descuento;
+
+                $(this).closest("tr").find("td:eq(6)").children("p").text(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(6)").children("input").val(importe.toFixed(2));
+                sumar();
+            }
+        }
+        
+        
     });
     $(document).on("keyup","#tbventas input.descuentos", function(){
         descuento = $(this).val();

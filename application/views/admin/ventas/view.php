@@ -33,6 +33,7 @@
 					<th>Nombre</th>
 					<th>Precio</th>
 					<th>Cantidad</th>
+					<th>Descuento</th>
 					<th>Importe</th>
 				</tr>
 			</thead>
@@ -43,25 +44,26 @@
 					<td><?php echo $detalle->nombre;?></td>
 					<td><?php echo $detalle->precio;?></td>
 					<td><?php echo $detalle->cantidad;?></td>
+					<td><?php echo $detalle->descuento;?></td>
 					<td><?php echo $detalle->importe;?></td>
 				</tr>
 				<?php endforeach;?>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="4" class="text-right"><strong>Subtotal:</strong></td>
+					<td colspan="5" class="text-right"><strong>Subtotal:</strong></td>
 					<td><?php echo $venta->subtotal;?></td>
 				</tr>
 				<tr>
-					<td colspan="4" class="text-right"><strong>IGV:</strong></td>
+					<td colspan="5" class="text-right"><strong>IGV:</strong></td>
 					<td><?php echo $venta->igv;?></td>
 				</tr>
 				<tr>
-					<td colspan="4" class="text-right"><strong>Descuento:</strong></td>
+					<td colspan="5" class="text-right"><strong>Descuento:</strong></td>
 					<td><?php echo $venta->descuento;?></td>
 				</tr>
 				<tr>
-					<td colspan="4" class="text-right"><strong>Total:</strong></td>
+					<td colspan="5" class="text-right"><strong>Total:</strong></td>
 					<td><?php echo $venta->total;?></td>
 				</tr>
 			</tfoot>
