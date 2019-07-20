@@ -2,12 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ventas extends CI_Controller {
-
+	private $permisos;
 	public function __construct(){
 		parent::__construct();
-		if (!$this->session->userdata("login")) {
-			redirect(base_url());
-		}
+		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Ventas_model");
 		$this->load->model("Clientes_model");
 		$this->load->model("Productos_model");
@@ -15,6 +13,7 @@ class Ventas extends CI_Controller {
 
 	public function index(){
 		$data  = array(
+			'permisos' => $this->permisos,
 			'ventas' => $this->Ventas_model->getVentas(), 
 		);
 		$this->load->view("layouts/header");
@@ -57,6 +56,8 @@ class Ventas extends CI_Controller {
 		$cantidades = $this->input->post("cantidades");
 		$importes = $this->input->post("importes");
 		$descuentos = $this->input->post("descuentos");
+		$tipo_precios = $this->input->post("tipo_precios");
+
 
 		$data = array(
 			'fecha' => $fecha,
@@ -74,7 +75,7 @@ class Ventas extends CI_Controller {
 		if ($this->Ventas_model->save($data)) {
 			$idventa = $this->Ventas_model->lastID();
 			$this->updateComprobante($idcomprobante);
-			$this->save_detalle($idproductos,$idventa,$precios,$cantidades,$importes,$descuentos);
+			$this->save_detalle($idproductos,$idventa,$precios,$cantidades,$importes,$descuentos, $tipo_precios);
 			redirect(base_url()."movimientos/ventas");
 
 		}else{
@@ -90,8 +91,9 @@ class Ventas extends CI_Controller {
 		$this->Ventas_model->updateComprobante($idcomprobante,$data);
 	}
 
-	protected function save_detalle($productos,$idventa,$precios,$cantidades,$importes,$descuentos){
+	protected function save_detalle($productos,$idventa,$precios,$cantidades,$importes,$descuentos,$tipo_precios){
 		for ($i=0; $i < count($productos); $i++) { 
+			$dataTipoPrecio = explode("*", $tipo_precios[$i]);
 			$data  = array(
 				'producto_id' => $productos[$i], 
 				'venta_id' => $idventa,
@@ -99,6 +101,7 @@ class Ventas extends CI_Controller {
 				'cantidad' => $cantidades[$i],
 				'importe'=> $importes[$i],
 				'descuento'=> $descuentos[$i],
+				'tipo_precio' => $dataTipoPrecio[0]
 			);
 
 			$this->Ventas_model->save_detalle($data);

@@ -2,15 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Clientes extends CI_Controller {
-
+	private $permisos;
 	public function __construct(){
 		parent::__construct();
+		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Clientes_model");
 	}
 
 	public function index()
 	{
 		$data  = array(
+			'permisos' => $this->permisos,
 			'clientes' => $this->Clientes_model->getClientes(), 
 		);
 		$this->load->view("layouts/header");

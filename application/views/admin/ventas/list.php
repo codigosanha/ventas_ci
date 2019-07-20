@@ -15,7 +15,10 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
+                        
+                        <?php if($permisos->insert == 1):?>
                         <a href="<?php echo base_url();?>movimientos/ventas/add" class="btn btn-primary btn-flat"><span class="fa fa-plus"></span> Agregar Venta</a>
+                        <?php endif;?>
                     </div>
                 </div>
                 <hr>

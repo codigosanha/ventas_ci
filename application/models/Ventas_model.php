@@ -31,6 +31,26 @@ class Ventas_model extends CI_Model {
 			return false;
 		}
 	}
+	public function getGanancias($fechainicio,$fechafin){
+		
+		$this->db->select("p.id,p.nombre,p.precio_compra,SUM(dv.cantidad) as cantidades,dv.precio,SUM(dv.descuento) as descuentos,SUM(dv.importe) as importes,dv.tipo_precio");
+		$this->db->from("detalle_venta dv");
+		$this->db->join("productos p","dv.producto_id = p.id");
+		$this->db->join("ventas v","dv.venta_id = v.id");
+		$this->db->where("v.fecha >=",$fechainicio);
+		$this->db->where("v.fecha <=",$fechafin);
+		$this->db->group_by("p.id");
+		$this->db->group_by("dv.tipo_precio");
+		$this->db->order_by("p.nombre");
+		$this->db->order_by("dv.tipo_precio");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		}else
+		{
+			return false;
+		}
+	}
 
 	public function getVenta($id){
 		$this->db->select("v.*,c.nombre,c.direccion,c.telefono,c.num_documento as documento,tc.nombre as tipocomprobante");

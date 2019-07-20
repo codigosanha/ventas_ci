@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ventas extends CI_Controller {
+class Ganancias extends CI_Controller {
 	private $permisos;
 	public function __construct(){
 		parent::__construct();
@@ -10,22 +10,23 @@ class Ventas extends CI_Controller {
 	}
 
 	public function index(){
-		$fechainicio = $this->input->post("fechainicio");
-		$fechafin = $this->input->post("fechafin");
+		$fechainicio = date("Y-m-d");
+		$fechafin = date("Y-m-d");
 		if ($this->input->post("buscar")) {
-			$ventas = $this->Ventas_model->getVentasbyDate($fechainicio,$fechafin);
+			$fechainicio = $this->input->post("fechainicio");
+			$fechafin = $this->input->post("fechafin");
 		}
-		else{
-			$ventas = $this->Ventas_model->getVentas();
-		}
+		
+		$productos = $this->Ventas_model->getGanancias($fechainicio,$fechafin);
+		
 		$data = array(
-			"ventas" => $ventas,
+			"productos" => $productos,
 			"fechainicio" => $fechainicio,
 			"fechafin" => $fechafin
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("admin/reportes/ventas",$data);
+		$this->load->view("admin/reportes/ganancias",$data);
 		$this->load->view("layouts/footer");
 	}
 }

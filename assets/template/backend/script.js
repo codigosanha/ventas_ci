@@ -3,13 +3,14 @@ $(document).ready(function () {
     var year = (new Date).getFullYear();
     datagrafico(base_url,year);
     $(document).on("change",".tipo_precio", function(){
-        var precio = $(this).val();
+        var dataPrecio = $(this).val();
+        var infoPrecio = dataPrecio.split("*");
         var descuento = $(this).closest("tr").children("td:eq(6)").find("input").val();
         var cantidad = $(this).closest("tr").children("td:eq(5)").find("input").val();
-        $(this).closest("tr").children("td:eq(3)").find("input").val(precio);
-        $(this).closest("tr").children("td:eq(3)").find("p").text(precio);
+        $(this).closest("tr").children("td:eq(3)").find("input").val(infoPrecio[1]);
+        $(this).closest("tr").children("td:eq(3)").find("p").text(infoPrecio[1]);
 
-        importe = (cantidad * precio) - descuento;
+        importe = (cantidad * infoPrecio[1]) - descuento;
 
         $(this).closest("tr").find("td:eq(7)").children("p").text(importe.toFixed(2));
         $(this).closest("tr").find("td:eq(7)").children("input").val(importe.toFixed(2));
@@ -215,9 +216,9 @@ $(document).ready(function () {
             html = "<tr>";
             html += "<td><input type='hidden' name='idproductos[]' value='"+infoproducto[0]+"'>"+infoproducto[1]+"</td>";
             html += "<td>"+infoproducto[2]+"</td>";
-            html += "<td><select class='form-control tipo_precio'>";
-            html += "<option value='"+infoproducto[3]+"'>Unidad</option>";
-            html += "<option value='"+infoproducto[4]+"'>Mayoreo</option>";
+            html += "<td><select class='form-control tipo_precio' name='tipo_precios[]'>";
+            html += "<option value='1*"+infoproducto[3]+"'>Unidad</option>";
+            html += "<option value='2*"+infoproducto[4]+"'>Mayoreo</option>";
             html += "</select></td>";
             html += "<td><p>"+infoproducto[3]+"</p><input type='hidden' name='precios[]' value='"+infoproducto[3]+"'></td>";
             html += "<td>"+infoproducto[5]+"</td>";
