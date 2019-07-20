@@ -71,7 +71,7 @@
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
-
+                                        <th>Tipo de Precio</th>
                                         <th>Precio</th>
                                         <th>Stock Max.</th>
                                         <th>Cantidad</th>

@@ -43,10 +43,15 @@
                                 <input type="text" class="form-control" id="precio_compra" name="precio_compra" value="<?php echo !empty(form_error('precio_compra')) ? set_value('precio_compra'):$producto->precio_compra?>">
                                 <?php echo form_error("precio_compra","<span class='help-block'>","</span>");?>
                             </div>
-                            <div class="form-group <?php echo !empty(form_error('precio_venta')) ? 'has-error':'';?>">
-                                <label for="precio_venta">Precio Venta:</label>
-                                <input type="text" class="form-control" id="precio_venta" name="precio_venta" value="<?php echo !empty(form_error('precio_venta')) ? set_value('precio_venta'):$producto->precio_venta?>">
-                                <?php echo form_error("precio_venta","<span class='help-block'>","</span>");?>
+                            <div class="form-group <?php echo !empty(form_error('precio_venta_unitario')) ? 'has-error':'';?>">
+                                <label for="precio_venta_unitario">Precio Venta por Unidad:</label>
+                                <input type="text" class="form-control" id="precio_venta_unitario" name="precio_venta_unitario" value="<?php echo !empty(form_error('precio_venta_unitario')) ? set_value('precio_venta_unitario'):$producto->precio_venta_unitario?>">
+                                <?php echo form_error("precio_venta_unitario","<span class='help-block'>","</span>");?>
+                            </div>
+                            <div class="form-group <?php echo !empty(form_error('precio_venta_mayoreo')) ? 'has-error':'';?>">
+                                <label for="precio_venta_mayoreo">Precio Venta por Mayoreo:</label>
+                                <input type="text" class="form-control" id="precio_venta_mayoreo" name="precio_venta_mayoreo" value="<?php echo !empty(form_error('precio_venta_mayoreo')) ? set_value('precio_venta_mayoreo'):$producto->precio_venta_mayoreo?>">
+                                <?php echo form_error("precio_venta_mayoreo","<span class='help-block'>","</span>");?>
                             </div>
                             <div class="form-group <?php echo !empty(form_error('stock')) ? 'has-error':'';?>">
                                 <label for="stock">Stock:</label>

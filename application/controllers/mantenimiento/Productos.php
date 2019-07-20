@@ -34,7 +34,8 @@ class Productos extends CI_Controller {
 		$codigo = $this->input->post("codigo");
 		$nombre = $this->input->post("nombre");
 		$descripcion = $this->input->post("descripcion");
-		$precio_venta = $this->input->post("precio_venta");
+		$precio_venta_unitario = $this->input->post("precio_venta_unitario");
+		$precio_venta_mayoreo = $this->input->post("precio_venta_mayoreo");
 		$precio_compra = $this->input->post("precio_compra");
 		$stock = $this->input->post("stock");
 		$categoria = $this->input->post("categoria");
@@ -42,8 +43,8 @@ class Productos extends CI_Controller {
 		$this->form_validation->set_rules("codigo","Codigo","required|is_unique[productos.codigo]");
 		$this->form_validation->set_rules("nombre","Nombre","required");
 		$this->form_validation->set_rules("precio_compra","Precio","required");
-		$this->form_validation->set_rules("precio_venta","Precio","required");
-
+		$this->form_validation->set_rules("precio_venta_unitario","Precio","required");
+		$this->form_validation->set_rules("precio_venta_mayoreo","Precio","required");
 		$this->form_validation->set_rules("stock","Stock","required");
 
 		if ($this->form_validation->run()) {
@@ -51,7 +52,8 @@ class Productos extends CI_Controller {
 				'codigo' => $codigo, 
 				'nombre' => $nombre,
 				'descripcion' => $descripcion,
-				'precio_venta' => $precio_venta,
+				'precio_venta_unitario' => $precio_venta_unitario,
+				'precio_venta_mayoreo' => $precio_venta_mayoreo,
 				'precio_compra' => $precio_compra,
 				'stock' => $stock,
 				'categoria_id' => $categoria,
@@ -89,7 +91,8 @@ class Productos extends CI_Controller {
 		$codigo = $this->input->post("codigo");
 		$nombre = $this->input->post("nombre");
 		$descripcion = $this->input->post("descripcion");
-		$precio_venta = $this->input->post("precio_venta");
+		$precio_venta_unitario = $this->input->post("precio_venta_unitario");
+		$precio_venta_mayoreo = $this->input->post("precio_venta_mayoreo");
 		$precio_compra = $this->input->post("precio_compra");
 		$stock = $this->input->post("stock");
 		$categoria = $this->input->post("categoria");
@@ -106,7 +109,8 @@ class Productos extends CI_Controller {
 		$this->form_validation->set_rules("codigo","Codigo","required".$is_unique);
 		$this->form_validation->set_rules("nombre","Nombre","required");
 		$this->form_validation->set_rules("precio_compra","Precio","required");
-		$this->form_validation->set_rules("precio_venta","Precio","required");
+		$this->form_validation->set_rules("precio_venta_unitario","Precio","required");
+		$this->form_validation->set_rules("precio_venta_mayoreo","Precio","required");
 		$this->form_validation->set_rules("stock","Stock","required");
 
 
@@ -115,7 +119,8 @@ class Productos extends CI_Controller {
 				'codigo' => $codigo, 
 				'nombre' => $nombre,
 				'descripcion' => $descripcion,
-				'precio_venta' => $precio_venta,
+				'precio_venta_unitario' => $precio_venta_unitario,
+				'precio_venta_mayoreo' => $precio_venta_mayoreo,
 				'precio_compra' => $precio_compra,
 				'stock' => $stock,
 				'categoria_id' => $categoria,

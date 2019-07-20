@@ -63,7 +63,7 @@ class Ventas_model extends CI_Model {
 	}
 
 	public function getproductos($valor){
-		$this->db->select("id,codigo,nombre as label,precio_venta,stock");
+		$this->db->select("id,codigo,nombre as label,precio_venta_unitario,precio_venta_mayoreo,stock");
 		$this->db->from("productos");
 		$this->db->like("nombre",$valor);
 		$this->db->where("stock >=","1");

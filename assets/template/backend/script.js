@@ -2,6 +2,20 @@ $(document).ready(function () {
     
     var year = (new Date).getFullYear();
     datagrafico(base_url,year);
+    $(document).on("change",".tipo_precio", function(){
+        var precio = $(this).val();
+        var descuento = $(this).closest("tr").children("td:eq(6)").find("input").val();
+        var cantidad = $(this).closest("tr").children("td:eq(5)").find("input").val();
+        $(this).closest("tr").children("td:eq(3)").find("input").val(precio);
+        $(this).closest("tr").children("td:eq(3)").find("p").text(precio);
+
+        importe = (cantidad * precio) - descuento;
+
+        $(this).closest("tr").find("td:eq(7)").children("p").text(importe.toFixed(2));
+        $(this).closest("tr").find("td:eq(7)").children("input").val(importe.toFixed(2));
+        sumar();
+
+    });
     $('#dni, #telefono, .cantidades').keypress(function (tecla) {
       if (tecla.charCode < 48 || tecla.charCode > 57) return false;
     });
@@ -190,7 +204,7 @@ $(document).ready(function () {
         },
         minLength:2,
         select:function(event, ui){
-            data = ui.item.id + "*"+ ui.item.codigo+ "*"+ ui.item.label+ "*"+ ui.item.precio_venta+ "*"+ ui.item.stock;
+            data = ui.item.id + "*"+ ui.item.codigo+ "*"+ ui.item.label+ "*"+ ui.item.precio_venta_unitario+"*"+ui.item.precio_venta_mayoreo+ "*"+ ui.item.stock;
             $("#btn-agregar").val(data);
         },
     });
@@ -201,8 +215,12 @@ $(document).ready(function () {
             html = "<tr>";
             html += "<td><input type='hidden' name='idproductos[]' value='"+infoproducto[0]+"'>"+infoproducto[1]+"</td>";
             html += "<td>"+infoproducto[2]+"</td>";
-            html += "<td><input type='hidden' name='precios[]' value='"+infoproducto[3]+"'>"+infoproducto[3]+"</td>";
-            html += "<td>"+infoproducto[4]+"</td>";
+            html += "<td><select class='form-control tipo_precio'>";
+            html += "<option value='"+infoproducto[3]+"'>Unidad</option>";
+            html += "<option value='"+infoproducto[4]+"'>Mayoreo</option>";
+            html += "</select></td>";
+            html += "<td><p>"+infoproducto[3]+"</p><input type='hidden' name='precios[]' value='"+infoproducto[3]+"'></td>";
+            html += "<td>"+infoproducto[5]+"</td>";
             html += "<td><input type='text' name='cantidades[]' value='1' class='cantidades' required='required'></td>";
             html += "<td><input type='text' name='descuentos[]' value='0.00' class='descuentos'></td>";
             html += "<td><input type='hidden' name='importes[]' value='"+infoproducto[3]+"'><p>"+infoproducto[3]+"</p></td>";
@@ -223,30 +241,30 @@ $(document).ready(function () {
     });
     $(document).on("keyup","#tbventas input.cantidades", function(){
         cantidad = $(this).val();
-        stock = $(this).closest("tr").find("td:eq(3)").text();
-        precio = $(this).closest("tr").find("td:eq(2)").text();
-        descuento = $(this).closest("tr").children("td:eq(5)").find("input").val();
+        stock = $(this).closest("tr").find("td:eq(4)").text();
+        precio = $(this).closest("tr").find("td:eq(3)").text();
+        descuento = $(this).closest("tr").children("td:eq(6)").find("input").val();
         if (cantidad !="") {
             if (Number(cantidad) == 0) {
                 alert("La cantidad no puede ser 0");
                 importe = precio - descuento;
                 $(this).val("1");
-                $(this).closest("tr").find("td:eq(6)").children("p").text(importe.toFixed(2));
-                $(this).closest("tr").find("td:eq(6)").children("input").val(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(7)").children("p").text(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(7)").children("input").val(importe.toFixed(2));
                 sumar();
             } else if(Number(cantidad) > Number(stock)){
                 importe = (precio * stock) - descuento;
                 $(this).val(stock);
-                $(this).closest("tr").find("td:eq(6)").children("p").text(importe.toFixed(2));
-                $(this).closest("tr").find("td:eq(6)").children("input").val(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(7)").children("p").text(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(7)").children("input").val(importe.toFixed(2));
                 sumar();
                 alert("La cantidad no puede sobrepasar el stock");
             }
             else{
                 importe = (cantidad * precio) - descuento;
 
-                $(this).closest("tr").find("td:eq(6)").children("p").text(importe.toFixed(2));
-                $(this).closest("tr").find("td:eq(6)").children("input").val(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(7)").children("p").text(importe.toFixed(2));
+                $(this).closest("tr").find("td:eq(7)").children("input").val(importe.toFixed(2));
                 sumar();
             }
         }
@@ -255,11 +273,11 @@ $(document).ready(function () {
     });
     $(document).on("keyup","#tbventas input.descuentos", function(){
         descuento = $(this).val();
-        precio = $(this).closest("tr").find("td:eq(2)").text();
-        cantidad = $(this).closest("tr").children("td:eq(4)").find("input").val();
+        precio = $(this).closest("tr").find("td:eq(3)").text();
+        cantidad = $(this).closest("tr").children("td:eq(5)").find("input").val();
         importe = (cantidad * precio) - descuento;
-        $(this).closest("tr").find("td:eq(6)").children("p").text(importe.toFixed(2));
-        $(this).closest("tr").find("td:eq(6)").children("input").val(importe.toFixed(2));
+        $(this).closest("tr").find("td:eq(7)").children("p").text(importe.toFixed(2));
+        $(this).closest("tr").find("td:eq(7)").children("input").val(importe.toFixed(2));
         sumar();
     });
     $(document).on("click",".btn-view-venta",function(){
@@ -308,7 +326,7 @@ function generarnumero(numero){
 function sumar(){
     subtotal = 0;
     $("#tbventas tbody tr").each(function(){
-        subtotal = subtotal + Number($(this).find("td:eq(6)").text());
+        subtotal = subtotal + Number($(this).find("td:eq(7)").text());
     });
     $("input[name=subtotal]").val(subtotal.toFixed(2));
     porcentaje = $("#igv").val();

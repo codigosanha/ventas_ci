@@ -29,7 +29,8 @@
                                     <th>Nombre</th>
                                     <th>Descripcion</th>
                                     <th>Precio Compra</th>
-                                    <th>Precio Venta</th>
+                                    <th>Precio Venta por Unidad</th>
+                                    <th>Precio Venta por Mayor</th>
                                     <th>Stock</th>
                                     <th>Categoria</th>
                                     <th>Opciones</th>
@@ -44,7 +45,8 @@
                                             <td><?php echo $producto->nombre;?></td>
                                             <td><?php echo $producto->descripcion;?></td>
                                             <td><?php echo $producto->precio_compra;?></td>
-                                            <td><?php echo $producto->precio_venta;?></td>
+                                            <td><?php echo $producto->precio_venta_unitario;?></td>
+                                            <td><?php echo $producto->precio_venta_mayoreo;?></td>
                                             <td><?php echo $producto->stock;?></td>
                                             <td><?php echo $producto->categoria;?></td>
                                             
