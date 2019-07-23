@@ -89,6 +89,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                    <form action="<?php echo base_url();?>reportes/ganancias/pdf" method="POST" target="_blank">
+                        <input type="hidden" name="fechainicio" value="<?php echo $fechainicio;?>">
+                        <input type="hidden" name="fechafin" value="<?php echo $fechafin;?>">
+                        <button type="submit" class="btn btn-danger">Generar PDF</button>
+                    </form>
                     </div>
                 </div>
             </div>
