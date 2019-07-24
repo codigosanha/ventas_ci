@@ -2,6 +2,15 @@ $(document).ready(function () {
     
     var year = (new Date).getFullYear();
     datagrafico(base_url,year);
+    $("#btn-guardar-venta").on("click", function(){
+        cantidadproductos = Number($("#tbventas tbody tr").length);
+        idcliente = $("#idcliente").val();
+        if (cantidadproductos == 0 || idcliente=="") {
+            alert("Falta seleccionar cliente y/o agregar productos al detalle");
+            return false;
+        }
+
+    });
     $(document).on("change",".tipo_precio", function(){
         var dataPrecio = $(this).val();
         var infoPrecio = dataPrecio.split("*");
@@ -330,10 +339,10 @@ function sumar(){
     });
     $("input[name=subtotal]").val(subtotal.toFixed(2));
     porcentaje = 0.12;
-    igv = subtotal * (porcentaje/100);
-    $("input[name=igv]").val(igv.toFixed(2));
+    iva = subtotal * porcentaje;
+    $("input[name=iva]").val(iva.toFixed(2));
     descuento = $("input[name=descuento]").val();
-    total = subtotal + igv - descuento;
+    total = subtotal + iva - descuento;
     $("input[name=total]").val(total.toFixed(2));
 
 }

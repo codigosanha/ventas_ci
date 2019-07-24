@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <span class="input-group-addon">IGV:</span>
+                                        <span class="input-group-addon">IVA:</span>
                                         <input type="text" class="form-control" placeholder="Username" name="iva" readonly="readonly">
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                             
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success btn-flat">Guardar</button>
+                                    <button type="submit" class="btn btn-success btn-flat" id="btn-guardar-venta">Guardar</button>
                                 </div>
                                 
                             </div>
@@ -132,7 +132,7 @@
                                     <td><?php echo $cliente->id;?></td>
                                     <td><?php echo $cliente->nombre;?></td>
                                     <td><?php echo $cliente->num_documento;?></td>
-                                    <?php $datacliente = $cliente->id."*".$cliente->nombre."*".$cliente->tipocliente."*".$cliente->tipodocumento."*".$cliente->num_documento."*".$cliente->telefono."*".$cliente->direccion;?>
+                                    <?php $datacliente = $cliente->id."*".$cliente->nombre."*".$cliente->tipocliente."*".$cliente->num_documento."*".$cliente->telefono."*".$cliente->direccion;?>
                                     <td>
                                         <button type="button" class="btn btn-success btn-check" value="<?php echo $datacliente;?>"><span class="fa fa-check"></span></button>
                                     </td>
