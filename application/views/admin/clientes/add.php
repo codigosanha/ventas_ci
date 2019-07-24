@@ -38,16 +38,6 @@
                                 </select>
                                 <?php echo form_error("tipocliente","<span class='help-block'>","</span>");?>
                             </div>
-                            <div class="form-group <?php echo form_error("tipodocumento") != false ? 'has-error':'';?>">
-                                <label for="tipodocumento">Tipo de Documento</label>
-                                <select name="tipodocumento" id="tipodocumento" class="form-control" >
-                                    <option value="">Seleccione...</option>
-                                    <?php foreach ($tipodocumentos as $tipodocumento) :?>
-                                        <option value="<?php echo $tipodocumento->id;?>" <?php echo set_select("tipodocumento",$tipodocumento->id);?>><?php echo $tipodocumento->nombre ?></option>
-                                    <?php endforeach;?>
-                                </select>
-                                <?php echo form_error("tipodocumento","<span class='help-block'>","</span>");?>
-                            </div>
                             <div class="form-group <?php echo form_error("numero") != false ? 'has-error':'';?>">
                                 <label for="numero">Numero del Documento:</label>
                                 <input type="text" class="form-control" id="numero" name="numero" value="<?php echo set_value("numero");?>">

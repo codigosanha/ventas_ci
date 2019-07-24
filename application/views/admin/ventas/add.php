@@ -18,29 +18,6 @@
                         
                         <form action="<?php echo base_url();?>movimientos/ventas/store" method="POST" class="form-horizontal">
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="">Comprobante:</label>
-                                    <select name="comprobantes" id="comprobantes" class="form-control" required>
-                                        <option value="">Seleccione...</option>
-                                        <?php foreach($tipocomprobantes as $tipocomprobante):?> 
-                                            <?php $datacomprobante = $tipocomprobante->id."*".$tipocomprobante->cantidad."*".$tipocomprobante->igv."*".$tipocomprobante->serie;?>
-                                            <option value="<?php echo $datacomprobante;?>"><?php echo $tipocomprobante->nombre?></option>
-                                        <?php endforeach;?>
-                                    </select>
-                                    <input type="hidden" id="idcomprobante" name="idcomprobante">
-                                    <input type="hidden" id="igv">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Serie:</label>
-                                    <input type="text" class="form-control" id="serie" name="serie" readonly>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Numero:</label>
-                                    <input type="text" class="form-control" id="numero" name="numero" readonly>
-                                </div>
-                                 
-                            </div>
-                            <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="">Cliente:</label>
                                     <div class="input-group">
@@ -95,7 +72,7 @@
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">IGV:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="igv" readonly="readonly">
+                                        <input type="text" class="form-control" placeholder="Username" name="iva" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-md-3">

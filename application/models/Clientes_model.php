@@ -3,10 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Clientes_model extends CI_Model {
 	public function getClientes(){
-		$this->db->select("c.*,tc.nombre as tipocliente, td.nombre as tipodocumento");
+		$this->db->select("c.*,tc.nombre as tipocliente");
 		$this->db->from("clientes c");
 		$this->db->join("tipo_cliente tc", "c.tipo_cliente_id = tc.id");
-		$this->db->join("tipo_documento td", "c.tipo_documento_id = td.id");
 		$this->db->where("c.estado","1");
 		$resultados = $this->db->get();
 		return $resultados->result();

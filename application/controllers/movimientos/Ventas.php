@@ -24,7 +24,6 @@ class Ventas extends CI_Controller {
 
 	public function add(){
 		$data = array(
-			"tipocomprobantes" => $this->Ventas_model->getComprobantes(),
 			"clientes" => $this->Clientes_model->getClientes()
 		);
 		$this->load->view("layouts/header");
@@ -42,14 +41,12 @@ class Ventas extends CI_Controller {
 	public function store(){
 		$fecha = $this->input->post("fecha");
 		$subtotal = $this->input->post("subtotal");
-		$igv = $this->input->post("igv");
+		$iva = $this->input->post("iva");
 		$descuento = $this->input->post("descuento");
 		$total = $this->input->post("total");
 		$idcomprobante = $this->input->post("idcomprobante");
 		$idcliente = $this->input->post("idcliente");
 		$idusuario = $this->session->userdata("id");
-		$numero = $this->input->post("numero");
-		$serie = $this->input->post("serie");
 
 		$idproductos = $this->input->post("idproductos");
 		$precios = $this->input->post("precios");
@@ -62,33 +59,21 @@ class Ventas extends CI_Controller {
 		$data = array(
 			'fecha' => $fecha,
 			'subtotal' => $subtotal,
-			'igv' => $igv,
+			'iva' => $iva,
 			'descuento' => $descuento,
 			'total' => $total,
-			'tipo_comprobante_id' => $idcomprobante,
 			'cliente_id' => $idcliente,
 			'usuario_id' => $idusuario,
-			'num_documento' => $numero,
-			'serie' => $serie,
 		);
 
 		if ($this->Ventas_model->save($data)) {
 			$idventa = $this->Ventas_model->lastID();
-			$this->updateComprobante($idcomprobante);
 			$this->save_detalle($idproductos,$idventa,$precios,$cantidades,$importes,$descuentos, $tipo_precios);
 			redirect(base_url()."movimientos/ventas");
 
 		}else{
 			redirect(base_url()."movimientos/ventas/add");
 		}
-	}
-
-	protected function updateComprobante($idcomprobante){
-		$comprobanteActual = $this->Ventas_model->getComprobante($idcomprobante);
-		$data  = array(
-			'cantidad' => $comprobanteActual->cantidad + 1, 
-		);
-		$this->Ventas_model->updateComprobante($idcomprobante,$data);
 	}
 
 	protected function save_detalle($productos,$idventa,$precios,$cantidades,$importes,$descuentos,$tipo_precios){

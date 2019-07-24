@@ -57,10 +57,9 @@ $(document).ready(function () {
         var infocliente = cliente.split("*");
         html = "<p><strong>Nombre:</strong>"+infocliente[1]+"</p>"
         html += "<p><strong>Tipo de Cliente:</strong>"+infocliente[2]+"</p>"
-        html += "<p><strong>Tipo de Documento:</strong>"+infocliente[3]+"</p>"
-        html += "<p><strong>Numero  de Documento:</strong>"+infocliente[4]+"</p>"
-        html += "<p><strong>Telefono:</strong>"+infocliente[5]+"</p>"
-        html += "<p><strong>Direccion:</strong>"+infocliente[6]+"</p>"
+        html += "<p><strong>Numero  de Documento:</strong>"+infocliente[3]+"</p>"
+        html += "<p><strong>Telefono:</strong>"+infocliente[4]+"</p>"
+        html += "<p><strong>Direccion:</strong>"+infocliente[5]+"</p>"
         $("#modal-default .modal-body").html(html);
     });
     $(".btn-view").on("click", function(){
@@ -330,7 +329,7 @@ function sumar(){
         subtotal = subtotal + Number($(this).find("td:eq(7)").text());
     });
     $("input[name=subtotal]").val(subtotal.toFixed(2));
-    porcentaje = $("#igv").val();
+    porcentaje = 0.12;
     igv = subtotal * (porcentaje/100);
     $("input[name=igv]").val(igv.toFixed(2));
     descuento = $("input[name=descuento]").val();

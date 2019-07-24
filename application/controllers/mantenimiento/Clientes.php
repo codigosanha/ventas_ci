@@ -25,7 +25,6 @@ class Clientes extends CI_Controller {
 
 		$data = array(
 			"tipoclientes" => $this->Clientes_model->getTipoClientes(),
-			"tipodocumentos" => $this->Clientes_model->getTipoDocumentos()
 		);
 
 		$this->load->view("layouts/header");
@@ -36,7 +35,6 @@ class Clientes extends CI_Controller {
 	public function store(){
 
 		$nombre = $this->input->post("nombre");
-		$tipodocumento = $this->input->post("tipodocumento");
 		$tipocliente = $this->input->post("tipocliente");
 		$direccion = $this->input->post("direccion");
 		$telefono = $this->input->post("telefono");
@@ -44,13 +42,11 @@ class Clientes extends CI_Controller {
 
 		$this->form_validation->set_rules("nombre","Nombre del Cliente","required");
 		$this->form_validation->set_rules("tipocliente","Tipo de Cliente","required");
-		$this->form_validation->set_rules("tipodocumento","Tipo de Documento","required");
 		$this->form_validation->set_rules("numero","Numero del Documento","required|is_unique[clientes.num_documento]");
 
 		if ($this->form_validation->run()) {
 			$data  = array(
 				'nombre' => $nombre, 
-				'tipo_documento_id' => $tipodocumento,
 				'tipo_cliente_id' => $tipocliente,
 				'direccion' => $direccion,
 				'telefono' => $telefono,
@@ -76,7 +72,6 @@ class Clientes extends CI_Controller {
 		$data  = array(
 			'cliente' => $this->Clientes_model->getCliente($id), 
 			"tipoclientes" => $this->Clientes_model->getTipoClientes(),
-			"tipodocumentos" => $this->Clientes_model->getTipoDocumentos()
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
@@ -88,7 +83,6 @@ class Clientes extends CI_Controller {
 	public function update(){
 		$idcliente = $this->input->post("idcliente");
 		$nombre = $this->input->post("nombre");
-		$tipodocumento = $this->input->post("tipodocumento");
 		$tipocliente = $this->input->post("tipocliente");
 		$direccion = $this->input->post("direccion");
 		$telefono = $this->input->post("telefono");
@@ -104,13 +98,11 @@ class Clientes extends CI_Controller {
 
 		$this->form_validation->set_rules("nombre","Nombre del Cliente","required");
 		$this->form_validation->set_rules("tipocliente","Tipo de Cliente","required");
-		$this->form_validation->set_rules("tipodocumento","Tipo de Documento","required");
 		$this->form_validation->set_rules("numero","Numero del Documento","required".$is_unique);
 
 		if ($this->form_validation->run()) {
 			$data = array(
 				'nombre' => $nombre, 
-				'tipo_documento_id' => $tipodocumento,
 				'tipo_cliente_id' => $tipocliente,
 				'direccion' => $direccion,
 				'telefono' => $telefono,

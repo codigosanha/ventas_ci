@@ -17,9 +17,7 @@
 	</div>	
 	<div class="col-xs-6">	
 		<b>COMPROBANTE</b> <br>
-		<b>Tipo de Comprobante:</b> <?php echo $venta->tipocomprobante;?><br>
-		<b>Serie:</b> <?php echo $venta->serie;?><br>
-		<b>Nro de Comprobante:</b><?php echo $venta->num_documento;?><br>
+		<b>Nro de Comprobante:</b><?php echo "A-".str_pad($venta->id, 6, "0", STR_PAD_LEFT);?><br>
 		<b>Fecha</b> <?php echo $venta->fecha;?>
 	</div>	
 </div>
@@ -55,8 +53,8 @@
 					<td><?php echo $venta->subtotal;?></td>
 				</tr>
 				<tr>
-					<td colspan="5" class="text-right"><strong>IGV:</strong></td>
-					<td><?php echo $venta->igv;?></td>
+					<td colspan="5" class="text-right"><strong>IVA:</strong></td>
+					<td><?php echo $venta->iva;?></td>
 				</tr>
 				<tr>
 					<td colspan="5" class="text-right"><strong>Descuento:</strong></td>

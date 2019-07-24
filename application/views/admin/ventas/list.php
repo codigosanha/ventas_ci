@@ -29,7 +29,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre Cliente</th>
-                                    <th>Tipo Comprobante</th>
                                     <th>Numero del Comprobante</th>
                                     <th>Fecha</th>
                                     <th>Total</th>
@@ -42,8 +41,7 @@
                                         <tr>
                                             <td><?php echo $venta->id;?></td>
                                             <td><?php echo $venta->nombre;?></td>
-                                            <td><?php echo $venta->tipocomprobante;?></td>
-                                            <td><?php echo $venta->num_documento;?></td>
+                                            <td><?php echo "A-".str_pad($venta->id, 6, "0", STR_PAD_LEFT);?></td>
                                             <td><?php echo $venta->fecha;?></td>
                                             <td><?php echo $venta->total;?></td>
                                             <td>

@@ -30,7 +30,6 @@
                                     <th>#</th>
                                     <th>Nombre</th>
                                     <th>Tipo de Cliente</th>
-                                    <th>Tipo de Documento</th>
                                     <th>Numero de Documento</th>
                                     <th>Telefono</th>
                                     <th>Direccion</th>
@@ -45,11 +44,10 @@
                                             <td><?php echo $cliente->id;?></td>
                                             <td><?php echo $cliente->nombre;?></td>
                                             <td><?php echo $cliente->tipocliente;?></td>
-                                            <td><?php echo $cliente->tipodocumento;?></td>
                                             <td><?php echo $cliente->num_documento;?></td>
                                             <td><?php echo $cliente->telefono;?></td>
                                             <td><?php echo $cliente->direccion;?></td>
-                                            <?php $datacliente = $cliente->id."*".$cliente->nombre."*".$cliente->tipocliente."*".$cliente->tipodocumento."*".$cliente->num_documento."*".$cliente->telefono."*".$cliente->direccion;?>
+                                            <?php $datacliente = $cliente->id."*".$cliente->nombre."*".$cliente->tipocliente."*".$cliente->num_documento."*".$cliente->telefono."*".$cliente->direccion;?>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-info btn-view-cliente" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacliente?>">
